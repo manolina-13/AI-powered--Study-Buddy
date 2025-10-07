@@ -314,4 +314,4 @@ if st.session_state.get("flashcards"):
     csv = df.to_csv(index=False).encode("utf-8")
     st.download_button("Download Flashcards (CSV)", csv, file_name="flashcards.csv")
     
-st.caption("AI Study Buddy | Designed and Developed by Manolina Das")
+st.caption("Built with ❤️-AI Study Buddy | Designed and Developed by Manolina Das")
