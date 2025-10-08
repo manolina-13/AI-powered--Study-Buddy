@@ -1,0 +1,12 @@
+[theme]
+# Pastel Purple for accents on widgets and button hovers
+primaryColor="purple"
+
+# Soft pastel blue for the main background of the app
+backgroundColor="#eff7fa"
+
+# A slightly lighter pastel blue for the sidebar and input areas
+secondaryBackgroundColor="#E8DAF0"
+
+# A standard dark color for all text to ensure readability
+textColor="#31333F"
