@@ -154,7 +154,7 @@ with st.sidebar:
     st.header("💡 Tips")
     st.info("""
     - **Input**: Use clear text from notes or articles (500-3000 words is ideal).
-    - **PDFs**: Image-based or scanned PDFs cannot be read.
+    - **PDFs**: Image-based or scanned PDFs can not be read.
     - **Privacy**: Avoid pasting sensitive personal information.
     """)
     st.markdown("---")
