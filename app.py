@@ -315,3 +315,11 @@ if st.session_state.get("flashcards"):
     st.download_button("Download Flashcards (CSV)", csv, file_name="flashcards.csv")
     
 st.caption("Built with ❤️ - AI Study Buddy | Designed and Developed by Manolina Das")
+
+# --- Force footer visible again ---
+st.markdown("""
+    <style>
+        footer {visibility: visible !important; display: block !important;}
+    </style>
+""", unsafe_allow_html=True)
+
