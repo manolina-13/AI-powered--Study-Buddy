@@ -147,7 +147,7 @@ def call_gemini(prompt_text, max_tokens=4096, temperature=0.4):
 
 # Page config
 st.set_page_config(page_title="AI Study Buddy", layout="wide")
-st.title("📚LearnEd - AI-Powered Study Buddy")
+st.title("📚LearnEd - AI Powered Study Buddy")
 
 # Sidebar: Inputs
 with st.sidebar:
