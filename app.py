@@ -151,15 +151,18 @@ st.title("📚LearnEd - AI Powered Study Buddy")
 
 # Sidebar: Inputs
 with st.sidebar:
-    st.header("💡 Get Started")
-    st.info("Upload your study notes or paste any text to activate the Study Buddy!")
+    st.header("💡 Tips")
+    st.info("""
+    - **Input**: Use clear text from notes or articles (500-3000 words is ideal).
+    - **PDFs**: Image-based or scanned PDFs can not be read.
+    - **Privacy**: Avoid pasting sensitive personal information.
+    """)
+    st.markdown("---")
     
     st.header("Input & Options")
     uploaded_file = st.file_uploader("Upload notes (.pdf, .docx, .txt)", type=["pdf", "docx", "txt"])
     paste_text = st.text_area("Or paste text/topic here", height=200)
     st.markdown("---")
-    
-    st.header("Actions & Settings")
     st.subheader("Summary options")
     summary_style = st.selectbox("Style", ["short", "bullet points", "detailed"])
     st.subheader("Simplify / Explain")
@@ -182,52 +185,31 @@ elif paste_text:
     full_text = paste_text
 
 
-# --- CONDITIONAL MAIN CONTENT AREA ---
+# --- MAIN CONTENT AREA (SINGLE COLUMN) ---
 
-# If no text is provided, show the welcome page.
-if not full_text.strip():
-    st.header("Welcome!")
-    st.markdown("""
-        This assistant is designed to supercharge your study sessions. It can help you summarize complex documents, 
-        explain difficult concepts, test your knowledge, and even create a structured study plan.
-    """)
-    
-    st.markdown("### How to use LearnEd:")
-    st.markdown("""
-        1.  **Upload a file** or **paste your text** in the sidebar on the left.
-        2.  Once your text is loaded, you will see a preview.
-        3.  **Choose your favorite tool** to summarize, explain, quiz yourself, or plan your session!
-    """)
-    
-    st.info("Just enter your study material in the sidebar to get started.")
-    
-    # A decorative image for the welcome page
-    st.image(
-        "https://images.pexels.com/photos/4144179/pexels-photo-4144179.jpeg",
-        caption="Photo by Julia M Cameron from Pexels"
-    )
-
-# If text IS provided, show the main application interface.
+st.header("1. Your Study Material")
+if full_text and full_text.strip():
+    st.text_area("Preview (first 60k chars)", value=full_text[:60000], height=250, disabled=True)
 else:
-    st.header("1. Your Study Material")
+    st.info("Paste text or upload a file from the sidebar to begin.")
     if uploaded_file and not full_text.strip():
         st.error("Could not extract text from the uploaded PDF. The file might be image-based or corrupted.")
-    else:
-        st.text_area("Preview (first 60k chars)", value=full_text[:60000], height=250, disabled=True)
 
-    # Initialize session_state for all outputs
-    if 'mcqs' not in st.session_state:
-        st.session_state.mcqs = []
-    if 'flashcards' not in st.session_state:
-        st.session_state.flashcards = []
-    if 'summary' not in st.session_state:
-        st.session_state.summary = ""
-    if 'explanation' not in st.session_state:
-        st.session_state.explanation = ""
-    if 'study_plan' not in st.session_state:
-        st.session_state.study_plan = []
+# Initialize session_state for all outputs
+if 'mcqs' not in st.session_state:
+    st.session_state.mcqs = []
+if 'flashcards' not in st.session_state:
+    st.session_state.flashcards = []
+if 'summary' not in st.session_state:
+    st.session_state.summary = ""
+if 'explanation' not in st.session_state:
+    st.session_state.explanation = ""
+if 'study_plan' not in st.session_state:
+    st.session_state.study_plan = []
 
-    # Action Buttons
+
+# Action Buttons
+if full_text and full_text.strip():
     st.markdown("### 2. Choose an Action")
     c1, c2, c3, c4 = st.columns(4)
 
@@ -264,71 +246,72 @@ else:
                 st.session_state.study_plan = parse_plan_json(raw_plan_data)
 
 
-    # --- Display Logic (Full Width) ---
+# --- Display Logic (Full Width) ---
 
-    if st.session_state.get("summary"):
-        st.success("Summary ready!")
-        st.markdown("### Summary")
-        st.write(st.session_state.summary)
-        st.download_button("Download Summary", st.session_state.summary, file_name="summary.txt")
+if st.session_state.get("summary"):
+    st.success("Summary ready!")
+    st.markdown("### Summary")
+    st.write(st.session_state.summary)
+    st.download_button("Download Summary", st.session_state.summary, file_name="summary.txt")
+    st.markdown("---")
+
+if st.session_state.get("explanation"):
+    st.success("Explanation ready!")
+    st.markdown("### Simplified Explanation")
+    st.write(st.session_state.explanation)
+    st.download_button("Download Explanation", st.session_state.explanation, file_name="explanation.txt")
+    st.markdown("---")
+
+if st.session_state.get("study_plan"):
+    st.success("Study plan generated!")
+    st.markdown("### Your Study Session Plan")
+    for i, block in enumerate(st.session_state.study_plan):
+        is_done = st.checkbox(f"Mark as Done", key=f"plan_item_{i}", value=False)
+        
+        block_type = block.get("block_type", "study").lower()
+        title = block.get("title", "Untitled")
+        desc = block.get("description", "No description.")
+        duration = block.get("duration", 0)
+
+        # Apply dimming and strikethrough style if checkbox is checked
+        style = 'opacity: 0.4; text-decoration: line-through;' if is_done else ''
+        
+        if block_type == 'study':
+            icon = "📚"
+        elif block_type == 'revision':
+            icon = "🔄"
+        elif block_type == 'break':
+            icon = "☕"
+        else:
+            icon = "✏️"
+
+        with st.container(border=True):
+            st.markdown(
+                f'<div style="{style}">'
+                f'<h4>{icon} {title}</h4>'
+                f'<b>🕰️ Duration: {duration} minutes</b>'
+                f'<p>{desc}</p>'
+                f'</div>',
+                unsafe_allow_html=True
+            )
+    st.markdown("---")
+
+if st.session_state.get("mcqs"):
+    st.success("Quiz & flashcards generated!")
+    st.markdown("### Multiple-Choice Questions")
+    for i, m in enumerate(st.session_state.mcqs, start=1):
+        st.write(f"**Q{i}: {m.get('question')}**")
+        opts = m.get("options", [])
+        user_answer = st.radio("Options:", opts, key=f"mcq_{i}", index=None, label_visibility="collapsed")
+        if st.button(f"Show Answer for Q{i}", key=f"ans_btn_{i}"):
+            st.info(f"Correct Answer: {m.get('answer')}")
         st.markdown("---")
 
-    if st.session_state.get("explanation"):
-        st.success("Explanation ready!")
-        st.markdown("### Simplified Explanation")
-        st.write(st.session_state.explanation)
-        st.download_button("Download Explanation", st.session_state.explanation, file_name="explanation.txt")
-        st.markdown("---")
-
-    if st.session_state.get("study_plan"):
-        st.success("Study plan generated!")
-        st.markdown("### Your Study Session Plan")
-        for i, block in enumerate(st.session_state.study_plan):
-            is_done = st.checkbox(f"Mark as Done", key=f"plan_item_{i}", value=False)
-            
-            block_type = block.get("block_type", "study").lower()
-            title = block.get("title", "Untitled")
-            desc = block.get("description", "No description.")
-            duration = block.get("duration", 0)
-            
-            style = 'opacity: 0.4; text-decoration: line-through;' if is_done else ''
-            
-            if block_type == 'study':
-                icon = "📚"
-            elif block_type == 'revision':
-                icon = "🔄"
-            elif block_type == 'break':
-                icon = "☕"
-            else:
-                icon = "✏️"
-
-            with st.container(border=True):
-                st.markdown(
-                    f'<div style="{style}">'
-                    f'<h4>{icon} {title}</h4>'
-                    f'<b>🕰️ Duration: {duration} minutes</b>'
-                    f'<p>{desc}</p>'
-                    f'</div>',
-                    unsafe_allow_html=True
-                )
-        st.markdown("---")
-
-    if st.session_state.get("mcqs"):
-        st.success("Quiz & flashcards generated!")
-        st.markdown("### Multiple-Choice Questions")
-        for i, m in enumerate(st.session_state.mcqs, start=1):
-            st.write(f"**Q{i}: {m.get('question')}**")
-            opts = m.get("options", [])
-            user_answer = st.radio("Options:", opts, key=f"mcq_{i}", index=None, label_visibility="collapsed")
-            if st.button(f"Show Answer for Q{i}", key=f"ans_btn_{i}"):
-                st.info(f"Correct Answer: {m.get('answer')}")
-            st.markdown("---")
-
-    if st.session_state.get("flashcards"):
-        st.markdown("### Flashcards")
-        df = pd.DataFrame(st.session_state.flashcards)
-        st.dataframe(df, use_container_width=True)
-        csv = df.to_csv(index=False).encode("utf-8")
-        st.download_button("Download Flashcards (CSV)", csv, file_name="flashcards.csv")
+if st.session_state.get("flashcards"):
+    st.markdown("### Flashcards")
+    df = pd.DataFrame(st.session_state.flashcards)
+    st.dataframe(df, use_container_width=True)
+    csv = df.to_csv(index=False).encode("utf-8")
+    st.download_button("Download Flashcards (CSV)", csv, file_name="flashcards.csv")
     
 st.caption("Built with ❤️ - AI Study Buddy | Designed and Developed by Manolina Das")
