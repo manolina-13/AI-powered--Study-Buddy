@@ -11,6 +11,7 @@ An intelligent Streamlit web application that leverages the Google Gemini API to
 -   **Concept Simplification**: Explains complex topics in easy-to-understand language, with modes for both beginners and college-level learners.
 -   **Automatic Quiz Generation**: Creates multiple-choice questions and flashcards from your study material to test your knowledge.
 -   **Custom Study Plans**: Generates a structured study session plan, breaking down topics into manageable blocks of study, revision, and breaks.
+-   **Text-to-Speech Accessibility**: Reads generated summaries and explanations aloud with the click of a button, enhancing accessibility and allowing for auditory learning.
 -   **Downloadable Content**: Save generated summaries, explanations, and flashcards (as `.csv`) for offline use.
 
 ## Getting Started
@@ -68,7 +69,8 @@ Navigate to the local URL provided by Streamlit in your web browser to start usi
     -   `🧑‍🏫 Simplify / Explain`
     -   `📝 Generate Quiz`
     -   `🗓️ Plan Session`
-4.  **View and Download**: The generated content will appear in the main panel. Use the download buttons to save the materials you need.
+4. **Interact with the Output**: The generated content will appear in the main panel. For summaries and explanations, click the 🔊 Read Aloud button to listen to the text. Use the download buttons to save any    materials you need.
+5.  **View and Download**: The generated content will appear in the main panel. Use the download buttons to save the materials you need.
 
 ## Code Overview
 
