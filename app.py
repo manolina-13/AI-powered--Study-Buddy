@@ -211,28 +211,65 @@ elif paste_text:
 #         "https://images.pexels.com/photos/4144179/pexels-photo-4144179.jpeg",
 #         caption="Photo by Julia M Cameron from Pexels"
 #     )
+# # If no text is provided, show the welcome page.
+# if not full_text.strip():
+#     st.header("👋 Welcome!")
+#     st.markdown("""
+#         This assistant is designed to supercharge your study sessions. It can help you summarize complex documents, 
+#         explain difficult concepts, test your knowledge, and even create a structured study plan.
+#     """)
+    
+#     st.markdown("### How to use LearnEd:")
+#     st.markdown("""
+#         1.  **Upload a file** or **paste your text** in the sidebar on the left.
+#         2.  Once your text is loaded, you will see a preview.
+#         3.  **Choose your favorite tool** to summarize, explain, quiz yourself, or plan your session!
+#     """)
+    
+#     st.info("Just enter your study material in the sidebar to get started.")
+    
+#     # A decorative image for the welcome page
+#     st.image(
+#         "https://images.pexels.com/photos/4144179/pexels-photo-4144179.jpeg",
+#         caption="Photo by Julia M Cameron from Pexels"
+#     )
+# --- CONDITIONAL MAIN CONTENT AREA ---
+
 # If no text is provided, show the welcome page.
 if not full_text.strip():
-    st.header("👋 Welcome!")
+    st.header("👋 Welcome !")
     st.markdown("""
-        This assistant is designed to supercharge your study sessions. It can help you summarize complex documents, 
-        explain difficult concepts, test your knowledge, and even create a structured study plan.
+        LearnEd helps you study smarter by using AI to **summarize notes**, **simplify complex topics**, 
+        **generate quizzes and flashcards**, and **plan focused study sessions**.
     """)
-    
-    st.markdown("### How to use LearnEd:")
+
+    st.markdown("### 🚀 How to Get Started:")
     st.markdown("""
-        1.  **Upload a file** or **paste your text** in the sidebar on the left.
-        2.  Once your text is loaded, you will see a preview.
-        3.  **Choose your favorite tool** to summarize, explain, quiz yourself, or plan your session!
+        1. **Upload a file** (`.pdf`, `.docx`, `.txt`) or **paste text** into the sidebar on the left.  
+        2. Once your content is loaded, you’ll see a quick preview.  
+        3. Explore the tools below to tailor your learning experience with built-in customization options!
     """)
-    
-    st.info("Just enter your study material in the sidebar to get started.")
-    
-    # A decorative image for the welcome page
-    st.image(
-        "https://images.pexels.com/photos/4144179/pexels-photo-4144179.jpeg",
-        caption="Photo by Julia M Cameron from Pexels"
-    )
+
+    st.markdown("### ⚙️ Actions & Customization Options")
+
+    st.subheader("🧾 Summarize")
+    st.markdown("Choose your preferred summary style:")
+    st.code('["short", "bullet points", "detailed"]', language="python")
+
+    st.subheader("📘 Simplify / Explain")
+    st.markdown("Adjust the explanation level for better understanding:")
+    st.code('["simple", "college-level"]', language="python")
+
+    st.subheader("🧠 Generate Quiz & Flashcards")
+    st.markdown("Decide how many MCQs or flashcards to generate:")
+    st.code("3–10", language="python")
+
+    st.subheader("🗓️ Plan Study Session")
+    st.markdown("Select the total study session duration:")
+    st.code('["30 minutes", "1 hour", "1.5 hours", "2 hours", "2.5 hours", "3 hours"]', language="python")
+
+    st.info("Once you're ready, just upload or paste your study material to get started!")
+
 
 # If text IS provided, show the main application interface.
 else:
