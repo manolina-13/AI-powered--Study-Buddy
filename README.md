@@ -70,7 +70,6 @@ Navigate to the local URL provided by Streamlit in your web browser to start usi
     -   `📝 Generate Quiz`
     -   `🗓️ Plan Session`
 4. **Interact with the Output**: The generated content will appear in the main panel. For summaries and explanations, click the 🔊 Read Aloud button to listen to the text. Use the download buttons to save any    materials you need.
-5.  **View and Download**: The generated content will appear in the main panel. Use the download buttons to save the materials you need.
 
 ## Code Overview
 
