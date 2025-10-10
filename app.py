@@ -189,6 +189,28 @@ elif paste_text:
 
 # --- CONDITIONAL MAIN CONTENT AREA ---
 
+# # If no text is provided, show the welcome page.
+# if not full_text.strip():
+#     st.header("Welcome!")
+#     st.markdown("""
+#         This assistant is designed to supercharge your study sessions. It can help you summarize complex documents, 
+#         explain difficult concepts, test your knowledge, and even create a structured study plan.
+#     """)
+    
+#     st.markdown("### How to use LearnEd:")
+#     st.markdown("""
+#         1.  **Upload a file** or **paste your text** in the sidebar on the left.
+#         2.  Once your text is loaded, you will see a preview.
+#         3.  **Choose your favorite tool** to summarize, explain, quiz yourself, or plan your session!
+#     """)
+    
+#     st.info("Just enter your study material in the sidebar to get started.")
+    
+#     # A decorative image for the welcome page
+#     st.image(
+#         "https://images.pexels.com/photos/4144179/pexels-photo-4144179.jpeg",
+#         caption="Photo by Julia M Cameron from Pexels"
+#     )
 # If no text is provided, show the welcome page.
 if not full_text.strip():
     st.header("Welcome!")
