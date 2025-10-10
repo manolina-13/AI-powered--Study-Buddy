@@ -213,7 +213,7 @@ elif paste_text:
 #     )
 # If no text is provided, show the welcome page.
 if not full_text.strip():
-    st.header("Welcome!")
+    st.header("👋 Welcome!")
     st.markdown("""
         This assistant is designed to supercharge your study sessions. It can help you summarize complex documents, 
         explain difficult concepts, test your knowledge, and even create a structured study plan.
