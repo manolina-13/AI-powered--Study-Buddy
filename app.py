@@ -18,7 +18,7 @@ import json
 from gtts import gTTS
 from io import BytesIO
 
-# --- Utility Functions (Normally in separate files) ---
+# --- Utility Functions ---
 
 def read_uploaded_file(uploaded_file):
     """Reads content from an uploaded file (.pdf, .docx, .txt)."""
