@@ -31,12 +31,25 @@ Follow these instructions to get a local copy of the project up and running on y
     cd AI-powered--Study-Buddy
     ```
 
-2.  **Install the required dependencies:**
+2. **(Recommended) Create and activate a virtual environment:**
+   ```bash
+     # Create virtual environment
+      python -m venv venv
+
+      # Activate it
+      # 👉 On Windows (PowerShell)
+         venv\Scripts\activate
+
+      # 👉 On macOS/Linux
+         source venv/bin/activate
+    ```
+
+4.  **Install the required dependencies:**
     ```bash
     pip install -r requirements.txt
     ```
 
-3.  **Set up your Gemini API Key:**
+5.  **Set up your Gemini API Key:**
     Create an environment variable to store your API key.
 
     *On Windows (PowerShell):*
