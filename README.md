@@ -88,7 +88,7 @@ Navigate to the local URL provided by Streamlit in your web browser to start usi
 
 The application is structured to separate concerns, making it easy to maintain and extend.
 
--   **`app.py`**: The main Streamlit application file. It handles the user interface, state management, and orchestrates calls to the backend logic.
+-   **`app.py`**: The main Streamlit application that powers the AI Study Buddy interface. It manages user interactions, file uploads, and session states, generates prompts for the Gemini API, and displays outputs such as summaries, explanations, quizzes, flashcards, and personalized study plans.
 -   **`utils/file_reader.py`**: Contains functions for reading and extracting text from various file formats.
 -   **`utils/prompts.py`**: Defines the prompt engineering logic, creating structured prompts for the Gemini API for each feature.
 -   **`utils/gemini_client.py`**: A wrapper for the Google Gemini API, handling the communication and response retrieval.
